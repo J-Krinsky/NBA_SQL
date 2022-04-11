@@ -1,4 +1,5 @@
-#Two queries to identify the number of strong three point shooters in each lineup, defined here as having a three point percentage at or above thirty five percent, which is leage average. 
+#Two queries to identify the number of strong three point shooters in each lineup, and a third to attempt to measure total three point skill of each lineup 
+#A strong three point shooter is defined here as having a three point percentage at or above thirty five percent, which is league average. 
 
 #Internal query combines the results of five queries using UNION ALL
 #Each indivudual query checks joins the lineups and players table on one column of the id_index table to check if that player is a stong shooter
@@ -76,4 +77,25 @@ WHERE IFNULL(3pm/3pa, 0) > .35
 ) as u
 GROUP BY u.id
 ORDER BY off_rating DESC
+;
+
+#Query usesa series of five joins of the players table to join on to each column of the id_index table, with the result being each lineup containing
+#the statistical information of each player in the lineup
+#Query finds the three point percentage of each player in the lineup and sums them, along with the players in each lineup and the offensive rating
+SELECT names, off_rating, IFNULL(p_one.3pm/p_one.3pa,0) + IFNULL(p_two.3pm/p_two.3pa,0) + IFNULL(p_three.3pm/p_three.3pa,0)
+ + IFNULL(p_four.3pm/p_four.3pa,0) + IFNULL(p_five.3pm/p_five.3pa,0) AS total_threes
+FROM players as p_one
+INNER JOIN id_index
+ON p_one.id = id_index.player_id_one
+INNER JOIN players as p_two
+ON p_two.id = id_index.player_id_two
+INNER JOIN players as p_three
+ON p_three.id = id_index.player_id_three
+INNER JOIN players as p_four
+ON p_four.id = id_index.player_id_four
+INNER JOIN players as p_five
+ON p_five.id = id_index.player_id_five
+INNER JOIN lineups
+ON lineups.id = id_index.lineup_id
+ORDER BY total_threes DESC
 ;
