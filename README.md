@@ -12,3 +12,7 @@ The file tables.sql creates each table, and the file import.sql imports the thre
 
 The first goal is to be able to identify lineups with players of interest in them. This is dealt with in the player_find.sql file. Several methods are outlined there, but the simplest is to search using the string stored in lineup.names using LIKE and wild-cards. This can be extended to find lineups containing a group of players, or one player without another. A question particular to the Celtics is which player makes the strongest fifth player along with the so called "Big 4" that are the core of some of their strongest lineups. 
   
+Having examined that, I turn to two areas of interest in lineup construction: how do the Celtics 2-big lineups compare to the solo-big lineups, and how does the 3-point shooting the Celtics have on the floor affect the offense. These are examined in the big_lineups.sql file and the 3_point_shooting.sql file. 
+Both of these involve combining the lineup and player table to find information. 
+
+The last question examined at this point is what impact the trade deadline move of swapping Josh Richardson for Derrick White had on the team from a lineup perspective. 
