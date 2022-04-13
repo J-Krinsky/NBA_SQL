@@ -1,4 +1,5 @@
-#Find overall ratings of indivdual players across lineups
+#Find overall ratings of indivdual players across lineups. 
+#Ratings are calculated on a per 100 posessions basis, so I use pace, which is possesions per 48 minutes, and minutes to find totals, and then recalculate based on the totals
 #Triple join all tables, group by player ID
 SELECT name,
 #Get players Net, offensive defensive ratings based on grouping
